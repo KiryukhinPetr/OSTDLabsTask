@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="parent">
+    <label>Edit Account</label>
+    <a ui-sref="accountList">Account List</a>
+    <form id="accountEditForm">
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <td>{{selectedAccount.id}}</td>
+            </tr>
+            <tr>
+                <th>Iban</th>
+                <td>
+                    <input type="text" size="40" ng-model="iban">
+                </td>
+            </tr>
+            <tr>
+                <th>Business Identifier Code</th>
+                <td>
+                    <input type="text" size="40" ng-model="bic">
+                </td>
+            </tr>
+        </table>
+        <button ng-click="updateAccount()">Update</button>
+        <button ng-click="deleteAccount()">Delete</button>
+    </form>
+</div>
+</body>
+</html>

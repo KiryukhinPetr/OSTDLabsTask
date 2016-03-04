@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="parent">
+    <label>View Account</label>
+    <a ui-sref="accountList">Account List</a>
+    <form id="accountViewForm">
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <td>{{selectedAccount.id}}</td>
+            </tr>
+            <tr>
+                <th>Iban</th>
+                <td>{{selectedAccount.iban}}</td>
+            </tr>
+            <tr>
+                <th>Bic</th>
+                <td>{{selectedAccount.bic}}</td>
+            </tr>
+        </table>
+        <button ng-click="editAccount()">Edit</button>
+        <button ng-click="deleteAccount()">Delete</button>
+    </form>
+</div>
+</body>
+</html>

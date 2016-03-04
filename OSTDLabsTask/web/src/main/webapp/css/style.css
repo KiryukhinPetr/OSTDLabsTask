@@ -1,0 +1,50 @@
+.field {clear:both; text-align:right; line-height:25px;}
+/*label {float:left; padding-right:10px;}*/
+.labelClass {float:left}
+.SendPublish {float:left}
+.parent {
+    margin-left: 2%;
+    margin-top: 2%;
+   }
+textarea
+{
+    width:500px;
+}
+select {
+    border: 0;
+    width: 100%;
+}
+
+
+/*table {*/
+    /*table-layout: fixed;*/
+    /*width:100%*/
+/*}*/
+/*td {*/
+    /*word-wrap:break-word;*/
+/*}*/
+
+/*tr th:nth-child(1){*/
+    /*width: 6%;*/
+/*}*/
+
+/*tr th:nth-child(2){*/
+    /*width: 20%;*/
+/*}*/
+
+/*tr th:nth-child(3){*/
+    /*width: 20%;*/
+/*}*/
+
+/*tr th:nth-child(4){*/
+    /*width: 20%;*/
+/*}*/
+
+/*tr th:nth-child(5){*/
+    /*width: 80%;*/
+/*}*/
+
+/*tr th:nth-child(6){*/
+    /*width: 20%;*/
+/*}*/
+

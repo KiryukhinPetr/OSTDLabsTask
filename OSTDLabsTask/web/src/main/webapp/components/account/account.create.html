@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="parent">
+    <label>Create Account</label>
+    <a ui-sref="accountList">Account List</a>
+    <form id="accountCreateForm">
+        <table border="1">
+            <tr>
+                <th>Iban</th>
+                <td>
+                    <input type="text" size="40" ng-model="iban">
+                </td>
+            </tr>
+            <tr>
+                <th>Business Identifier Code</th>
+                <td>
+                    <input type="text" size="40" ng-model="bic">
+                </td>
+            </tr>
+        </table>
+        <button ng-click="createAccount()">Create</button>
+    </form>
+</div>
+</body>
+</html>

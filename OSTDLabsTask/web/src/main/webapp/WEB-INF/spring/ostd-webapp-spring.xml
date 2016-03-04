@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:cxf="http://cxf.apache.org/core" xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:jms="http://www.springframework.org/schema/jms"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://cxf.apache.org/jaxrs	http://cxf.apache.org/schemas/jaxrs.xsd
+			http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+            http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
+	<import resource="classpath:META-INF/spring/rest-bean-account-spring.xml" />
+	<import resource="classpath:META-INF/spring/jms-bean-account-spring.xml" />
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+	<context:property-placeholder location="classpath:ostd-application.properties"  />
+	<jaxrs:server id="restContainer" address="/">
+		<jaxrs:serviceBeans>
+			<ref bean="accountResource"/>
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:server>
+	<!-- The Spring message listener container configuration -->
+
+	<jms:listener-container
+			container-type="default"
+			connection-factory="connectionFactory"
+			acknowledge="auto">
+		<jms:listener destination="${queue.name}" ref="jmsMessageConsumer" method="onMessage" />
+	</jms:listener-container>
+</beans>

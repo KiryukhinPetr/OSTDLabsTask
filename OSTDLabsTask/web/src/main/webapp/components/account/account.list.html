@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="parent">
+    <label>Accounts List</label>
+    <a ui-sref="accountCreate">New Account</a>
+    <table border="1">
+        <tr id="heading">
+            <th ng-click = "order('id')">ID</th>
+            <th ng-click = "order('iban')">Iban</th>
+            <th ng-click = "order('bic')">Business Identifier Code</th>
+        </tr>
+        <tr ng-hide="records.length==0" ng-repeat="record in records.slice(((currentPage - 1) * numPerPage), (currentPage * numPerPage)) | orderBy:predicate:reverse">
+            <td><a ui-sref="accountView({id: {{record.id}}})">{{record.id}}</a></td>
+            <td>{{record.iban}}</td>
+            <td>{{record.bic}}</td>
+        </tr>
+        <tr ng-hide="records.length!=0">
+            <td colspan=3>No records found.</td>
+        </tr>
+    </table>
+    <h4>{{records.length}} total records</h4>
+    <pagination ng-hide="records.length==0"
+                ng-model="currentPage"
+                total-items="records.length"
+                items-per-page="itemsPerPage"
+                max-size="maxSize"
+                boundary-links="true">
+    </pagination>
+</div>
+</body>
+</html>
