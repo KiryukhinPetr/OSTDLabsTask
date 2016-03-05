@@ -18,8 +18,12 @@ public interface AccountService {
 
     void deleteById(Long id);
 
+    void deleteAll();
+
     void update(Long id, String iban, String bic);
 
     void create(String iban, String bic);
+
+    void createAccount(String iban, String bic);
 
 }

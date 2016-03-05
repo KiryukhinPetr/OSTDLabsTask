@@ -48,4 +48,10 @@ public class AccountDao extends GenericDAO<Account, Long> implements IAccountDao
     public void deleteById(Long id){
         delete(findById(id));
     }
+    public void deleteAll(){
+        List<Account> accountList = findAll();
+        for(Account account : accountList){
+            deleteById(account.getId());
+        }
+    }
 }

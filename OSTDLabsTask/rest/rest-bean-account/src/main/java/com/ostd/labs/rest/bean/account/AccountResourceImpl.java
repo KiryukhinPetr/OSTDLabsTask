@@ -21,7 +21,7 @@ public class AccountResourceImpl implements AccountResource {
 
     private AccountService accountService;
 
-    public AccountService getComponentService() {
+    public AccountService getAccountService() {
         return accountService;
     }
 

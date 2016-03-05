@@ -84,6 +84,10 @@ public class AccountServiceImpl implements AccountService {
         accountDao.deleteById(id);
     }
 
+    public void deleteAll(){
+        accountDao.deleteAll();
+    }
+
     public void update(Long id, String iban, String bic){
         Account account = accountDao.findById(id);
         account.setIban(iban);
@@ -97,6 +101,14 @@ public class AccountServiceImpl implements AccountService {
         account.setBic(bic);
         accountDao.create(account);
         jmsMessageProducer.send("New Account with iban: " + iban + " and bic: " + bic + " was created" );
+    }
+
+    public void createAccount(String iban, String bic){
+        Account account = new Account();
+        account.setIban(iban);
+        account.setBic(bic);
+        accountDao.create(account);
+
     }
 
 }

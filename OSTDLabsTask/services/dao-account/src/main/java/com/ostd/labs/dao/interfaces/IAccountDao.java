@@ -14,5 +14,6 @@ public interface IAccountDao extends IGenericDAO<Account, Long> {
     List<Account> findByIbanAndBic(String iban, String bic);
     List<Account> getAll();
     void deleteById(Long id);
+    void deleteAll();
 
 }

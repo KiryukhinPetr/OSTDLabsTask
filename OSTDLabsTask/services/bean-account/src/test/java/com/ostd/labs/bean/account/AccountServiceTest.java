@@ -1,54 +1,74 @@
 package com.ostd.labs.bean.account;
 import com.ostd.labs.api.account.AccountService;
 import com.ostd.labs.dto.account.AccountDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import java.util.List;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @author pkiryukhin
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "/META-INF/spring/bean-account-spring.xml"
+        "classpath:META-INF/spring/bean-account-spring.xml"
 })
-@Ignore
+
+//@Ignore
 public class AccountServiceTest {
 
     @Autowired
     private AccountService accountService;
 
-    private <T> T loadJsonFile(String fileName, Class<T> resultClass) {
-        ObjectMapper mapper = new ObjectMapper();
-        try (InputStream inputStream = getClass().getResourceAsStream("/cea2datamart/" + fileName)) {
-            return mapper.readValue(inputStream, resultClass);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    @Before
+    public void setUpToAccountTestData(){
+        accountService.createAccount("1", "1");
+        accountService.createAccount("1", "2");
+        accountService.createAccount("1", "3");
+        accountService.createAccount("2", "4");
     }
 
     @Test
-    public void importTableDataToDataMartTest() {
-        String templateName = "unittest";
-        String reportName = "unittest_importTableDataToDataMartTest";
+    public void findByIban(){
+        List<AccountDTO> accountDTOList = accountService.findByIban("2");
+        Assert.assertTrue("", accountDTOList.size() == 1 && accountDTOList.get(0).getIban().equals("2"));
+    }
 
-//        SummaryReportDto dto = new SummaryReportDto();
-//        dto.setTemplateName(templateName);
-//        dto.setReportName(reportName);
-//        TableDataDTO tableDataDTO = loadJsonFile("1-TableDataDTO.js", TableDataDTO.class);
-//        ReportPeriodDto period = new ReportPeriodDto(PeriodType.CURRENT_MONTH_TO_DATE);
-//        databaseImportService.importTableDataToDataMart(dto, tableDataDTO, period);
+    @Test
+    public void findByBic(){
+        List<AccountDTO> accountDTOList = accountService.findByBic("1");
+        Assert.assertTrue("", accountDTOList.size() == 1 && accountDTOList.get(0).getBic().equals("1"));
+    }
 
-        //TODO: create test DAO to view datamart and check results
+    @Test
+    public void findByIbanAndBic(){
+        List<AccountDTO> accountDTOList = accountService.findByIbanAndBic("1", "1");
+        Assert.assertTrue("", accountDTOList.size() == 1 && accountDTOList.get(0).getIban().equals("1") && accountDTOList.get(0).getBic().equals("1"));
+    }
+
+
+    @Test
+    public void deleteById(){
+        accountService.createAccount("10", "10");
+        Long id = accountService.findByIbanAndBic("10", "10").get(0).getId();
+        accountService.deleteById(id);
+        List<AccountDTO> accountDTOList = accountService.findByIbanAndBic("10", "10");
+        Assert.assertTrue("", accountDTOList.size() == 0);
+    }
+    @Test
+    public void update(){
+        accountService.createAccount("11", "11");
+        Long id = accountService.findByIbanAndBic("11", "11").get(0).getId();
+        accountService.update(id, "20", "20");
+        AccountDTO accountDTO = accountService.getById(id);
+        Assert.assertTrue("", accountDTO.getId() == id && accountDTO.getIban().equals("20") && accountDTO.getBic().equals("20"));
+    }
+    @After
+    public void tearDownToAccountTestData(){
+        accountService.deleteAll();
     }
 
 
