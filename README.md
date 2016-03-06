@@ -27,4 +27,4 @@ ostd-application.properties
 log4j.properties.
 You should setup JMS settings in ostd-application.properties file (queue.name and broker.uri)
 And define path to the log file with messages from JMS in log4j.properties.
-For authentication use admin/admin, also you can define login/password in security.xml file.
+For authentication use admin/admin, also you can define login/password in spring-security.xml file.
