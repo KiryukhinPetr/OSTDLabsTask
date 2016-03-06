@@ -1,6 +1,6 @@
 # OSTDLabsTask
 Create example web application using Java, Maven, Spring, Spring MVC, Spring Security,
-ActiveMQ, CXF, JAX-RS, Hibernate, Hsqldb, Tomcat, AngularJS.
+ActiveMQ, CXF, JAX-RS, Hibernate, Hsqldb, Tomcat, AngularJS, JUnit.
 
 Main objectives of this application are
 1. Create multi module maven project.
